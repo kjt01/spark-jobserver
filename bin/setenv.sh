@@ -90,7 +90,7 @@ export HADOOP_CONF_DIR
 
 GC_OPTS_BASE="-XX:+UseConcMarkSweepGC
          -verbose:gc -XX:+PrintGCTimeStamps
-         -XX:MaxPermSize=512m
+         -XX:MaxMetaspaceSize=512m
          -XX:+CMSClassUnloadingEnabled "
 
 JAVA_OPTS_BASE="-XX:MaxDirectMemorySize=$MAX_DIRECT_MEMORY

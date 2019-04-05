@@ -1,0 +1,39 @@
+{
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "containerDefinitions": [
+        {
+            "name": "spark-master",
+            "image": "888658187696.dkr.ecr.us-east-1.amazonaws.com/spark-jobserver:latest",
+            "memory": 1000,
+            "cpu": 1024,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 7077,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 8080,
+                    "protocol": "tcp"
+                }
+            ],
+            "command": [
+                "/bin/bash", "-c", "sed -i \"s|_hostname||g\" /jobserver/docker.conf && start-master.sh"
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/spark-master",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "networkMode": "awsvpc",
+    "family": "spark-master",
+    "taskRoleArn": "arn:aws:iam::888658187696:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::888658187696:role/ecsTaskExecutionRole"
+}

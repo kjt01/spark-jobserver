@@ -9,6 +9,8 @@
 #   JOBSERVER_FG    - launches job server in foreground; defaults to forking in background
 set -e
 
+IS_SJS=$1
+
 get_abs_script_path() {
   pushd . >/dev/null
   cd "$(dirname "$0")"
@@ -17,6 +19,8 @@ get_abs_script_path() {
 }
 
 get_abs_script_path
+
+conf=$(ls $appdir/*.conf)
 
 set -a
 . $appdir/setenv.sh

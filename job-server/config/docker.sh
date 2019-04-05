@@ -1,9 +1,20 @@
-# Docker environment vars
-# NOTE: only static vars not intended to be changed by users should appear here, because
-#       this file gets sourced in the middle of server_start.sh, so it will override
-#       any env vars set in the docker run command line.
+#!/usr/bin/env bash
+
+JMX_PORT=9999
+INSTALL_DIR=/jobserver
+LOG_DIR=/jobserver/logs
 PIDFILE=spark-jobserver.pid
+JOBSERVER_MEMORY=1G
+SPARK_VERSION=2.11.12
+MAX_DIRECT_MEMORY=512M
 SPARK_HOME=/spark
 SPARK_CONF_DIR=$SPARK_HOME/conf
-# For Docker, always run start script as foreground
-JOBSERVER_FG=1
+SCALA_VERSION=2.11.12
+
+REMOTE_JOBSERVER_DIR=file:///jobserver
+MANAGER_JAR_FILE="$REMOTE_JOBSERVER_DIR/spark-job-server.jar"
+MANAGER_CONF_FILE="$conffile"
+MANAGER_EXTRA_JAVA_OPTIONS=
+MANAGER_EXTRA_SPARK_CONFS=
+MANAGER_LOGGING_OPTS="-Dlog4j.configuration=$REMOTE_JOBSERVER_DIR/log4j-server.properties"
+SPARK_LAUNCHER_VERBOSE=0
